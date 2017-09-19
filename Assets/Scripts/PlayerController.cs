@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
     private void updateCameraAngleByMouse()
     {
         m_xRotation += Input.GetAxis("Mouse X") * m_MouseSensativity * Time.deltaTime % 360;
-        m_yRotation = Mathf.Clamp(m_yRotation - Input.GetAxis("Mouse Y") * (m_MouseSensativity / 2) * Time.deltaTime,-90,90);
+        m_yRotation = Mathf.Clamp(m_yRotation - Input.GetAxis("Mouse Y") * (m_MouseSensativity / 2) * Time.deltaTime,-90,50);
         Camera.main.transform.rotation = Quaternion.Euler(m_yRotation, m_xRotation, 0);
     }
 
