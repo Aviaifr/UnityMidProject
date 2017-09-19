@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         updateCameraAngleByMouse();
         updatePlayerLocation();
+		shootHandle ();
 	}
 
     private void updateCameraAngleByMouse()
@@ -82,4 +83,17 @@ public class PlayerController : MonoBehaviour {
             m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
         }
     }
+
+	private void shootHandle()
+	{
+		if (Input.GetMouseButtonDown (0)) {
+
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			if (Physics.Raycast (ray, out hit))
+			if (hit.rigidbody != null && hit is GameObject )/*&& (hit as GameObject).tag.Equals("Enemy")*/
+				//				Debug.Log ("ERR :" +	hit.rigidbody.transform.name);
+				Destroy(hit.transform.gameObject);
+		}
+	}
 }
