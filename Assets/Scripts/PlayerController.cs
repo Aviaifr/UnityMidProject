@@ -89,9 +89,10 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 
 			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			//Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 			if (Physics.Raycast (ray, out hit))
-			if (hit.rigidbody != null && hit is GameObject )/*&& (hit as GameObject).tag.Equals("Enemy")*/
+			if (hit.rigidbody != null && hit.transform.tag.Equals("Enemy") )/*&& (hit as GameObject).tag.Equals("Enemy")*/
 				//				Debug.Log ("ERR :" +	hit.rigidbody.transform.name);
 				Destroy(hit.transform.gameObject);
 		}
