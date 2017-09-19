@@ -10,6 +10,7 @@ public class enemyAI : MonoBehaviour {
     public float rotationDamping;
     public float moveSpeed;
     public GameObject menu;
+    public bool isActiveGame = true;
 
 	// Use this for initialization
 	void Start () {
@@ -18,17 +19,19 @@ public class enemyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        playerDistance = Vector3.Distance(player.position, transform.position);
-
-        if(playerDistance < 15f)
+        if (isActiveGame)
         {
-            lookAtPlayer();
-        }
+            playerDistance = Vector3.Distance(player.position, transform.position);
 
-        if(playerDistance < 12f)
-        {
-            chase();
+            if (playerDistance < 15f)
+            {
+                lookAtPlayer();
+            }
+
+            if (playerDistance < 12f)
+            {
+                chase();
+            }
         }
 	}
 
@@ -48,5 +51,6 @@ public class enemyAI : MonoBehaviour {
     {
         menu.SetActive(true);
         GameObject.Find("FirstPersonCamera").SendMessage("GameOver");
+        isActiveGame = false;
     }
 }
