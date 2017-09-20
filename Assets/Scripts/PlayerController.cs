@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] private bool m_IsWalking;
@@ -19,28 +20,44 @@ public class PlayerController : MonoBehaviour {
     private float m_MouseSensativity;
 
     private Camera m_Camera;
-    //private bool m_isInJump;
     private float m_YRotation;
     private Vector2 m_Input;
-    //private Vector3 m_MovementDirection = Vector3.zero;
-    //private CharacterController m_CharacterController;
     private CollisionFlags m_CollisionFlags;
-    //private Vector3 m_OriginalCameraPosition;
-    //private AudioSource m_AudioSource;
     private float m_xRotation = 0;
     private float m_yRotation = 0;
     [SerializeField] float factor = 0.01f;
     private bool isGameActive = true;
+    private AudioSource shootSound;
+    private AudioSource noAmmoSound;
+    private AudioSource DeathSound;
+    private AudioSource KilledEnemySound;
+    private AudioSource ammoPickedSound;
 
-	// Use this for initialization
+    private int Ammunition = 0;
+    [SerializeField]
+    public Text AmmounitionText;
+    [SerializeField]
+    public Text NoAmmoText;
+
 	void Start () {
-        //m_CharacterController = GetComponent<CharacterController>();
         m_Camera = Camera.main;
-        //m_OriginalCameraPosition = m_Camera.transform.localPosition;
-       // m_isInJump = false;
-        //m_AudioSource = GetComponent<AudioSource>();
-        m_MouseSensativity = 500f;
+        m_MouseSensativity = 400;
+        initSounds();
 	}
+
+    private void initSounds()
+    {
+        shootSound = gameObject.AddComponent<AudioSource>();
+        shootSound.clip = (AudioClip)Resources.Load("Sounds/shot");
+        noAmmoSound = gameObject.AddComponent<AudioSource>();
+        noAmmoSound.clip = (AudioClip)Resources.Load("Sounds/noEmmo");
+        DeathSound = gameObject.AddComponent<AudioSource>();
+        DeathSound.clip = (AudioClip)Resources.Load("Sounds/Death");
+        KilledEnemySound = gameObject.AddComponent<AudioSource>();
+        KilledEnemySound.clip = (AudioClip)Resources.Load("Sounds/ohyeaSound");
+        ammoPickedSound = gameObject.AddComponent<AudioSource>();
+        ammoPickedSound.clip = (AudioClip)Resources.Load("Sounds/pickAmmo");
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -91,19 +108,51 @@ public class PlayerController : MonoBehaviour {
 	private void shootHandle()
 	{
 		if (Input.GetMouseButtonDown (0)) {
-
-			RaycastHit hit;
-			//Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-			if (Physics.Raycast (ray, out hit))
-			if (hit.rigidbody != null && hit.transform.tag.Equals("Enemy") )/*&& (hit as GameObject).tag.Equals("Enemy")*/
-				//				Debug.Log ("ERR :" +	hit.rigidbody.transform.name);
-				Destroy(hit.transform.gameObject);
+            if (Ammunition > 0)
+            {
+                takeAShot();
+            }
+            else
+            {
+                noAmmoSound.Play();
+            }
 		}
 	}
 
+    private void takeAShot()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.rigidbody != null && hit.transform.tag.Equals("Enemy"))
+            {
+                Destroy(hit.transform.gameObject);
+                KilledEnemySound.Play();
+            }
+        }
+        shootSound.Play();
+        Ammunition--;
+        updateAmmo();
+    }
+
     public void GameOver()
     {
+        DeathSound.Play();
         isGameActive = false;
+        this.SendMessage("StopTime");
+    }
+
+    public void CollectAmmo()
+    {
+        Ammunition += 5;
+        ammoPickedSound.Play();
+        updateAmmo();
+    }
+
+    private void updateAmmo()
+    {
+        AmmounitionText.text = Ammunition.ToString();
+        NoAmmoText.enabled = Ammunition == 0;
     }
 }

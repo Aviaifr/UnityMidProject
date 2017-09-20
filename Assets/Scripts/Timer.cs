@@ -32,4 +32,9 @@ public class Timer : MonoBehaviour
 		m_IsFinnished = true;
 		timerText.color = Color.yellow;
 	}
+
+    public void StopTime()
+    {
+        m_IsFinnished = true;
+    }
 }

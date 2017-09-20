@@ -49,8 +49,11 @@ public class enemyAI : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        menu.SetActive(true);
-        GameObject.Find("FirstPersonCamera").SendMessage("GameOver");
-        isActiveGame = false;
+        if (other.name == "FirstPersonCamera")
+        {
+            menu.SetActive(true);
+            GameObject.Find("FirstPersonCamera").SendMessage("GameOver");
+            isActiveGame = false;
+        }
     }
 }
