@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -32,6 +33,10 @@ public class PlayerController : MonoBehaviour {
     private AudioSource DeathSound;
     private AudioSource KilledEnemySound;
     private AudioSource ammoPickedSound;
+    [SerializeField]
+    private string nextLevelScene = "Level002";
+    [SerializeField]
+    private string nextSceneText = "Good Job, Moving to the next level!";
 
     private int Ammunition = 0;
     [SerializeField]
@@ -150,6 +155,19 @@ public class PlayerController : MonoBehaviour {
         updateAmmo();
     }
 
+    public void NextLevel()
+    {
+        this.SendMessage("StopTime");
+        NoAmmoText.color = Color.green;
+        NoAmmoText.text = nextSceneText;
+        StartCoroutine("Wait");
+    }
+  
+  IEnumerator Wait()
+  {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(nextLevelScene);
+  }
     private void updateAmmo()
     {
         AmmounitionText.text = Ammunition.ToString();
