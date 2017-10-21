@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour 
 {
 	public Text timerText;
+    public Text fpsText;
 
-	private float m_StartTime;
+    private float m_StartTime;
 	private bool m_IsFinnished = false;
+    private float deltaTime;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +28,9 @@ public class Timer : MonoBehaviour
 		string secondes = (t % 60).ToString ("f0");
 
 		timerText.text = minutes + ":" + secondes;
+
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        fpsText.text = "FPS: " + Mathf.Ceil(1.0f / deltaTime).ToString();
 	}
 
 	public void Finnished()
