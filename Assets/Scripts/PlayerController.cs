@@ -92,22 +92,26 @@ public class PlayerController : MonoBehaviour {
         if (v > 3.5f)
             return;
        
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
+        //}
+
+        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor * Input.GetAxis("Vertical");
+        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor * Input.GetAxis("Horizontal");
+
     }
 
 	private void shootHandle()
