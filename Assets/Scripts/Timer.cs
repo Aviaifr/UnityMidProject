@@ -27,10 +27,14 @@ public class Timer : MonoBehaviour
 		string minutes = ((int)t / 60).ToString();
 		string secondes = (t % 60).ToString ("f0");
 
+<<<<<<< HEAD
 		timerText.text = minutes + ":" + secondes;
 
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         fpsText.text = "FPS: " + Mathf.Ceil(1.0f / deltaTime).ToString();
+=======
+		//timerText.text = minutes + ":" + secondes;
+>>>>>>> parent of b12f9b8... fixed timer and ammo
 	}
 
 	public void Finnished()
