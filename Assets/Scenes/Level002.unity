@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.4455704, g: 0.49525255, b: 0.57414156, a: 1}
-=======
-  m_IndirectSpecularColor: {r: 0.17338756, g: 0.21673849, b: 0.29880807, a: 1}
->>>>>>> 376166fc3cae93ca4a41fc892d4a258d0e37f518
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1210,12 +1206,12 @@ Prefab:
         type: 2}
       propertyPath: NoAmmoText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1072357830}
     - target: {fileID: 114015949831545760, guid: 83b14559b2ae1f047a3aeb5165740a92,
         type: 2}
       propertyPath: AmmounitionText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 94643292}
     - target: {fileID: 114641912428878924, guid: 83b14559b2ae1f047a3aeb5165740a92,
         type: 2}
       propertyPath: timerText
@@ -1444,6 +1440,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4849271648871086, guid: a3b7e5fbe186af3438c91a53ddf1d231,
     type: 2}
   m_PrefabInternal: {fileID: 89191884}
+--- !u!114 &94643292 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114472436137432908, guid: 535e46f794506df45b87ad8448d29574,
+    type: 2}
+  m_PrefabInternal: {fileID: 1712172791}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &102967799
 Prefab:
   m_ObjectHideFlags: 0
@@ -8809,6 +8811,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4849271648871086, guid: a3b7e5fbe186af3438c91a53ddf1d231,
     type: 2}
   m_PrefabInternal: {fileID: 1071064953}
+--- !u!114 &1072357830 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114590293431356418, guid: 535e46f794506df45b87ad8448d29574,
+    type: 2}
+  m_PrefabInternal: {fileID: 1712172791}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1075494161
 Prefab:
   m_ObjectHideFlags: 0

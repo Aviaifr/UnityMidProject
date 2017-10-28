@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour {
         if (v > 3.5f)
             return;
        
-<<<<<<< HEAD
         //if (Input.GetKey(KeyCode.W))
         //{
         //    m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
@@ -127,23 +126,6 @@ public class PlayerController : MonoBehaviour {
         {
             //strafe sideways
             transform.position += new Vector3(0, 0, -horizontal * speed * Time.deltaTime);
-=======
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
->>>>>>> 376166fc3cae93ca4a41fc892d4a258d0e37f518
         }
     }
 

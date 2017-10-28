@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.44391164, g: 0.49328893, b: 0.5727745, a: 1}
-=======
-  m_IndirectSpecularColor: {r: 0.17338741, g: 0.21673846, b: 0.298808, a: 1}
->>>>>>> 376166fc3cae93ca4a41fc892d4a258d0e37f518
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -915,7 +911,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c40fb27d9a20e154e8ef121d1a64f82c, type: 2}
   m_IsPrefabParent: 0
-<<<<<<< HEAD
 --- !u!1 &417824892
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,8 +989,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 417824892}
-=======
->>>>>>> 376166fc3cae93ca4a41fc892d4a258d0e37f518
 --- !u!4 &496039219 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4849271648871086, guid: a3b7e5fbe186af3438c91a53ddf1d231,
@@ -2383,7 +2376,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 224462988237742568, guid: 535e46f794506df45b87ad8448d29574,
         type: 2}
       propertyPath: m_RootOrder
@@ -2424,8 +2416,6 @@ Prefab:
       propertyPath: m_ReferenceResolution.y
       value: 800
       objectReference: {fileID: 0}
-=======
->>>>>>> 376166fc3cae93ca4a41fc892d4a258d0e37f518
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 535e46f794506df45b87ad8448d29574, type: 2}
   m_IsPrefabParent: 0
@@ -3462,6 +3452,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4849271648871086, guid: a3b7e5fbe186af3438c91a53ddf1d231,
     type: 2}
   m_PrefabInternal: {fileID: 1090328892}
+--- !u!224 &1047033382 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224795956312711198, guid: 535e46f794506df45b87ad8448d29574,
+    type: 2}
+  m_PrefabInternal: {fileID: 808622168}
 --- !u!1001 &1090328892
 Prefab:
   m_ObjectHideFlags: 0
@@ -5745,6 +5740,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114641912428878924, guid: 83b14559b2ae1f047a3aeb5165740a92,
+        type: 2}
+      propertyPath: fpsText
+      value: 
+      objectReference: {fileID: 417824894}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 83b14559b2ae1f047a3aeb5165740a92, type: 2}
   m_IsPrefabParent: 0
