@@ -108,15 +108,30 @@ public class PlayerController : MonoBehaviour {
         //{
         //    m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
         //}
-
-        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor * Input.GetAxis("Vertical");
+        if (Input.GetAxis("Fire") == 1 || Input.GetAxis("Fire3") == 1 || Input.GetAxis("Cancel") == 1)
+        {
+            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
+        }
+        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor *Input.GetAxis("Vertical"); ;
         m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor * Input.GetAxis("Horizontal");
 
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(vertical) > 0.01)
+        {
+            //move in the direction of the camera
+            transform.position = transform.position + Camera.main.transform.forward * vertical * speed * Time.deltaTime;
+        }
+        if (Mathf.Abs(horizontal) > 0.01)
+        {
+            //strafe sideways
+            transform.position += new Vector3(0, 0, -horizontal * speed * Time.deltaTime);
+        }
     }
 
 	private void shootHandle()
 	{
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown(0) || Input.GetAxis("Fire") == 1 || Input.GetAxis("Fire3") == 1 || Input.GetAxis("Cancel") == 1) {
             if (Ammunition > 0)
             {
                 takeAShot();
