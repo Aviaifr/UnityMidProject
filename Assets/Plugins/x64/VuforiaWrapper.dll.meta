@@ -1,21 +1,14 @@
 fileFormatVersion: 2
-guid: 59177834662aa4ead89a6c07a4715165
-timeCreated: 1465328657
+guid: 88a1563c57ea7a54cb79754cfe8f80ba
+timeCreated: 1486470568
 licenseType: Pro
 PluginImporter:
   serializedVersion: 2
   iconMap: {}
   executionOrder: {}
-  isPreloaded: 1
+  isPreloaded: 0
   isOverridable: 0
   platformData:
-    data:
-      first:
-        Android: Android
-      second:
-        enabled: 0
-        settings:
-          CPU: AnyCPU
     data:
       first:
         Any: 
@@ -30,7 +23,6 @@ PluginImporter:
         settings:
           CPU: x86_64
           DefaultValueInitialized: true
-          OS: Windows
     data:
       first:
         Facebook: Win
@@ -45,13 +37,6 @@ PluginImporter:
         enabled: 1
         settings:
           CPU: AnyCPU
-    data:
-      first:
-        Samsung TV: SamsungTV
-      second:
-        enabled: 0
-        settings:
-          STV_MODEL: STANDARD_13
     data:
       first:
         Standalone: Linux
@@ -70,7 +55,7 @@ PluginImporter:
       first:
         Standalone: LinuxUniversal
       second:
-        enabled: 0
+        enabled: 1
         settings:
           CPU: x86_64
     data:
@@ -108,14 +93,6 @@ PluginImporter:
         enabled: 1
         settings:
           CPU: AnyCPU
-    data:
-      first:
-        iPhone: iOS
-      second:
-        enabled: 0
-        settings:
-          CompileFlags: 
-          FrameworkDependencies: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 
