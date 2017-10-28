@@ -6,6 +6,6 @@ public class EnterVictoryZone : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		GameObject.Find ("FirstPersonCamera").SendMessage ("NextLevel");
+		GameObject.Find ("CapsuleMainBody").SendMessage ("NextLevel");
 	}
 }

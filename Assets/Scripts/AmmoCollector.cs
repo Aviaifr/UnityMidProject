@@ -17,9 +17,9 @@ public class AmmoCollector : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "FirstPersonCamera")
+        if (other.name == "CapsuleMainBody")
         {
-            GameObject.Find("FirstPersonCamera").SendMessage("CollectAmmo");
+            GameObject.Find("CapsuleMainBody").SendMessage("CollectAmmo");
             Destroy(transform.gameObject);
         }
     }

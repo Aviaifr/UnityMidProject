@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] private bool m_IsWalking;
@@ -19,7 +20,8 @@ public class PlayerController : MonoBehaviour {
     private AudioClip m_LandSound;
     [SerializeField]
     private float m_MouseSensativity;
-
+    private bool isAllowMovement = true;
+    [SerializeField]
     private Camera m_Camera;
     private float m_YRotation;
     private Vector2 m_Input;
@@ -45,8 +47,8 @@ public class PlayerController : MonoBehaviour {
     public Text NoAmmoText;
 
 	void Start () {
-        m_Camera = Camera.main;
         m_MouseSensativity = 400;
+        CrossPlatformInputManager.SwitchActiveInputMethod(CrossPlatformInputManager.ActiveInputMethod.Hardware);
         initSounds();
 	}
 
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isGameActive)
+        if (isGameActive && isAllowMovement)
         {
             updateCameraAngleByMouse();
             updatePlayerLocation();
@@ -76,9 +78,9 @@ public class PlayerController : MonoBehaviour {
 
     private void updateCameraAngleByMouse()
     {
-        m_xRotation += Input.GetAxis("Mouse X") * m_MouseSensativity * Time.deltaTime % 360;
-        m_yRotation = Mathf.Clamp(m_yRotation - Input.GetAxis("Mouse Y") * (m_MouseSensativity / 2) * Time.deltaTime,-90,50);
-        Camera.main.transform.rotation = Quaternion.Euler(m_yRotation, m_xRotation, 0);
+        //m_xRotation += Input.GetAxis("Mouse X") * m_MouseSensativity * Time.deltaTime % 360;
+        //m_yRotation = Mathf.Clamp(m_yRotation - Input.GetAxis("Mouse Y") * (m_MouseSensativity / 2) * Time.deltaTime, -90, 50);
+        //m_Camera.transform.rotation = Quaternion.Euler(m_yRotation, m_xRotation, 0);
     }
 
     private void updatePlayerLocation()
@@ -89,49 +91,49 @@ public class PlayerController : MonoBehaviour {
         {
 
         }
-        if (v > 3.5f)
+        if (v > 10f)
             return;
-       
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        //}
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor;
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    m_Camera.transform.GetComponent<Rigidbody>().velocity -= new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        //}
-        if (Input.GetAxis("Fire") == 1 || Input.GetAxis("Fire3") == 1 || Input.GetAxis("Cancel") == 1)
-        {
-            m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor;
-        }
-        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * factor *Input.GetAxis("Vertical"); ;
-        m_Camera.transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * factor * Input.GetAxis("Horizontal");
+
 
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
+
         if (Mathf.Abs(vertical) > 0.01)
         {
             //move in the direction of the camera
-            transform.position = transform.position + Camera.main.transform.forward * vertical * speed * Time.deltaTime;
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * vertical;
+            //transform.Translate(new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * vertical);
         }
         if (Mathf.Abs(horizontal) > 0.01)
         {
             //strafe sideways
-            transform.position += new Vector3(0, 0, -horizontal * speed * Time.deltaTime);
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * horizontal;
+        }
+
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime * -1;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.right.x, 0f, m_Camera.transform.right.z) * speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.GetComponent<Rigidbody>().velocity += new Vector3(m_Camera.transform.forward.x, 0f, m_Camera.transform.forward.z) * speed * Time.deltaTime * -1;
         }
     }
 
-	private void shootHandle()
-	{
-		if (Input.GetMouseButtonDown(0) || Input.GetAxis("Fire") == 1 || Input.GetAxis("Fire3") == 1 || Input.GetAxis("Cancel") == 1) {
+    private void shootHandle()
+    {
+        Debug.Log(isGameActive.ToString());
+        if (!shootSound.isPlaying && (Input.GetMouseButtonDown(0) || Input.GetAxis("Fire1") == 1))//|| Input.GetAxis("Fire3") == 1 || Input.GetAxis("Cancel") == 1)
+        {
             if (Ammunition > 0)
             {
                 takeAShot();
@@ -140,13 +142,14 @@ public class PlayerController : MonoBehaviour {
             {
                 noAmmoSound.Play();
             }
-		}
-	}
+        }
+    }
+
 
     private void takeAShot()
     {
         RaycastHit hit;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray ray = new Ray(m_Camera.transform.position, m_Camera.transform.forward);
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.rigidbody != null && hit.transform.tag.Equals("Enemy"))
@@ -163,7 +166,10 @@ public class PlayerController : MonoBehaviour {
     public void GameOver()
     {
         DeathSound.Play();
+        Debug.Log("Dead");
         isGameActive = false;
+        isAllowMovement = false;
+        Debug.Log(isGameActive.ToString());
         this.SendMessage("StopTime");
     }
 
@@ -187,6 +193,7 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(nextLevelScene);
   }
+
     private void updateAmmo()
     {
         AmmounitionText.text = Ammunition.ToString();

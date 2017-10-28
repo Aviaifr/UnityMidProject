@@ -49,10 +49,10 @@ public class enemyAI : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "FirstPersonCamera")
+        if (other.name == "CapsuleMainBody")
         {
             menu.SetActive(true);
-            GameObject.Find("FirstPersonCamera").SendMessage("GameOver");
+            GameObject.Find("CapsuleMainBody").SendMessage("GameOver");
             isActiveGame = false;
         }
     }

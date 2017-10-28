@@ -41,6 +41,7 @@ public class Timer : MonoBehaviour
 
     public void StopTime()
     {
+        Debug.Log("Stopped");
         m_IsFinnished = true;
     }
 }
